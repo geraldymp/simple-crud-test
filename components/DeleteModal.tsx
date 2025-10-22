@@ -25,14 +25,7 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
             If you sure to delete this employee then click Agree button or if
             you are not willing to delete just click Disagree
           </Text>
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              gap: 12,
-            }}
-          >
+          <View style={styles.buttonsWrapper}>
             <Text style={{ color: "tomato" }} onPress={onAgree}>
               Agree
             </Text>
@@ -45,6 +38,8 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
     </Modal>
   );
 };
+
+export default React.memo(DeleteConfirmationModal);
 
 const styles = StyleSheet.create({
   overlay: {
@@ -60,6 +55,10 @@ const styles = StyleSheet.create({
     width: "80%",
     elevation: 3,
   },
+  buttonsWrapper: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    gap: 12,
+  },
 });
-
-export default React.memo(DeleteConfirmationModal);

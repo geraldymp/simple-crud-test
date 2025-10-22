@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from "react-native";
 import useHome from "./useHome";
 import ListItem from "@/components/ListItem";
@@ -13,7 +14,7 @@ import DeleteModal from "@/components/DeleteModal";
 export default function Home() {
   const { actions, states } = useHome();
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View style={styles.container}>
       <Button
         title="Add employee"
         onPress={actions.goToAddEmployee}
@@ -22,26 +23,15 @@ export default function Home() {
           marginLeft: 16,
         }}
       />
-      <Text
-        style={{
-          marginTop: 16,
-          marginLeft: 16,
-        }}
-      >
-        Employee Lists:
-      </Text>
+
+      <Text style={styles.employeeListText}>Employee Lists:</Text>
+
       {states.loading && (
         <ActivityIndicator size={50} color="blue" style={{ marginTop: 12 }} />
       )}
+
       {!states.loading && states.error && (
-        <View
-          style={{
-            marginTop: 24,
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 12,
-          }}
-        >
+        <View style={styles.reloadWrapper}>
           <Text>Please try again in a few seconds</Text>
           <Button
             title="Reload"
@@ -50,6 +40,7 @@ export default function Home() {
           />
         </View>
       )}
+
       {!states.loading && !states.error && (
         <FlatList
           data={states.employees}
@@ -60,14 +51,10 @@ export default function Home() {
               onEdit={() => actions.goToEditEmployee(item)}
             />
           )}
-          contentContainerStyle={{
-            marginTop: 8,
-            paddingHorizontal: 16,
-            gap: 12,
-            paddingBottom: 18,
-          }}
+          contentContainerStyle={styles.flatListContent}
         />
       )}
+
       <DeleteModal
         visible={states.deletionModalVisible}
         onAgree={actions.onAgreeToDelete}
@@ -77,3 +64,26 @@ export default function Home() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  employeeListText: {
+    marginTop: 16,
+    marginLeft: 16,
+  },
+  reloadWrapper: {
+    marginTop: 24,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 12,
+  },
+  flatListContent: {
+    marginTop: 8,
+    paddingHorizontal: 16,
+    gap: 12,
+    paddingBottom: 18,
+  },
+});

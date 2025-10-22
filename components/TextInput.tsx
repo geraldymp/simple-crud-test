@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { TextInput as RNTextInput } from "react-native";
+import { TextInput as RNTextInput, StyleSheet } from "react-native";
 
 interface ButtonProps {
   value: string;
@@ -31,3 +31,14 @@ const TextInput: React.FC<ButtonProps> = ({
 };
 
 export default memo(TextInput);
+
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 12,
+    paddingHorizontal: 8,
+    borderRadius: 6,
+    borderColor: "gray",
+    borderWidth: 0.5,
+    fontSize: 16,
+  },
+});
