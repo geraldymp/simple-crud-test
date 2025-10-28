@@ -27,7 +27,12 @@ export default function Home() {
       <Text style={styles.employeeListText}>Employee Lists:</Text>
 
       {states.loading && (
-        <ActivityIndicator size={50} color="blue" style={{ marginTop: 12 }} />
+        <ActivityIndicator
+          testID="loading-indicator"
+          size={50}
+          color="blue"
+          style={{ marginTop: 12 }}
+        />
       )}
 
       {!states.loading && states.error && (
